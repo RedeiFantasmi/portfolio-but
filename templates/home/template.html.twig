@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Portfolio</title>
+        <link rel="icon" type="image/ico" href="{{ asset('assets/img/favicon.ico') }}" />
+
+        {# <script>
+            if(localStorage.getItem("light-theme") == "true") {
+                document.documentElement.dataset.theme = 'light';
+            }
+        </script> #}
+
+        <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+        <!-- <link rel="stylesheet" href="assets/css/light-theme.css" id="light-theme"> -->
+        <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome6/css/all.min.css') }}">
+        {# <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100;8..144,200;8..144,300;8..144,400;8..144,500;8..144,600;8..144,700;8..144,800;8..144,900;8..144,1000&display=swap" rel="stylesheet"> #}
+        <!-- <link rel="stylesheet" href="/assets/css/monokai-sublime.min.css"> -->
+        {# <link rel="stylesheet" href="assets/css/atom-one-dark.min.css">
+
+        <script src="/assets/js/highlight.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery-3.6.0.min.js"></script> #}
+        
+    </head>
+    <body>
+
+{# <div class="spinner-backdrop">
+    <div class="spinner"></div>
+</div> #}
+
+<header>
+    <p class="placeholder-text"></p>
+    <p>Portfolio</p>
+    <p>de</p>
+    <p>Michele FLORIO</p>
+</header>
+<nav>
+    <div class="burger-menu link">
+        <div class="animated-burger link">
+            <input type="checkbox">
+            <div class="burger-icon">
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+            </div>
+            <div class="burger-links">
+                <a href="#pres" tabindex="0" class="link">Présentation</a>
+                <a href="#parc" tabindex="0" class="link">Parcours</a>
+                <a href="#comp" tabindex="0" class="link">Compétences</a>
+                <a href="#proj" tabindex="0" class="link">Projets</a>
+                <a href="#veil" tabindex="0" class="link">Veille</a>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- <div id="title">portfolio</div> -->
+    <div id="links">
+        <a href="#pres" tabindex="0" class="link">Présentation</a>
+        <a href="#parc" tabindex="0" class="link">Parcours</a>
+        <a href="#comp" tabindex="0" class="link">Compétences</a>
+        <a href="#proj" tabindex="0" class="link">Projets</a>
+        <a href="#veil" tabindex="0" class="link">Veille</a>
+    </div>
+    <button id="theme-switcher" class="link" type="button"></button>
+    
+</nav>
+
+<button type="button" id="scroll-arrow" class="hidden"><i class="fas fa-chevron-down"></i></button>
+
+<main>
+    <aside>
+        <a href="#pres" tabindex="0" class="selected">Présentation</a>
+        <a href="#parc" tabindex="0">Parcours</a>
+        <a href="#comp" tabindex="0">Compétences</a>
+        <a href="#proj" tabindex="0">Projets</a>
+        <a href="#veil" tabindex="0">Veille</a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="/admin" class="link">EasyAdmin <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        {% endif %}
+    </aside>
+    <div class="container">
+        <section id="pres" class="container-section">
+            <h2>Présentation</h2>
+            <div class="presentation-content">
+                {% block presentation %}{% endblock %}
+            </div>
+        </section>
+        <section id="parc" class="container-section">
+            <h2>Parcours</h2>
+            <div class="career">
+                {% block career %}{% endblock %}
+            </div>
+        </section>
+        <section id="comp" class="container-section">
+            <h2>Compétences</h2>
+            <div class="skills-list">
+                {% block skills %}{% endblock %}
+            </div>
+        </section>
+        <section id="proj" class="container-section">
+            <h2>Projets</h2>
+            {# <div id="carousel">
+                <div class="btn-group">
+                    <button>Scolaires</button>
+                    <button>Professionnels</button>
+                    <!-- <button>Personnels</button> -->
+                    <button class="action download" data-file="/assets/tableau_de_synthèse.pdf">Tableau de synthèse <i class="fas fa-download"></i></button>
+                </div>
+                <div id="carousel-content">
+                    <button class="controls"><i class="fas fa-chevron-left "></i></button> #}
+                    
+                        {# if(is_iterable($carousel)) {
+                            foreach($carousel as $img) {
+                                echo '<div class="slide hidden ' . $img["type"] . ($img["type"] === 'scolaires' ? ' active' : '') . '">
+                                    <img src="' . $img["img"] . '" class="" name="' . $img["img_name"] . '">
+                                    <span class="slide-desc"><span class="title">' . ucfirst(str_replace('_', ' ', $img["img_name"])) . '</span></span>
+                                    <button class="slide-btn" id="'. $img["img_name"] . '">Plus de détails</button>
+                                </div>';
+                            }
+                        } #}
+                    
+                    {# <button class="controls"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div id="carousel-buttons"></div>
+            </div> #}
+        </section>
+        <section class="container-section">
+            <h2>Veille Technologique</h2>
+            {# <div class="veille-content">
+                <p>
+                    La veille technologique est-ce qui permet de s'informer sur les évolutions de son métier et donc d'anticiper pour rester compétitif dans son domaine. 
+                    <br>
+                    De ce fait, il est important de pratiquer une veille technologique efficace, ciblée et régulière afin de ne pas se laisser dépasser.
+                </p>
+                <p>Il existe de nombreuses façons de faire sa veille. Malgré tout, une méthode fonctionne très bien :</p>
+                <ol>
+                    <li>Définition du périmètre et des besoins</li>
+                    <li>Collecte des informations</li>
+                    <li>Analyse / Tri des informations</li>
+                    <li>Diffusion</li>
+                </ol>
+                <p>Actuellement, ma veille s'axe sur l'intelligence artificielle car c'est un sujet qui concerne très fortement mon secteur d'activité et qui n'est pas dépourvu de risques.</p>
+                <p>
+                    Pour récupérer les informations que je cherche, j'utilise un aggrégateur de flux pour récupérer des articles de plusieurs sources tout en ciblant certains mots clés (ex : IA, AI, intelligence artificielle, ChatGPT, Google, Cybercriminels...).
+                    <br>
+                    Je fais ensuite un premier tri en lisant les différents titres des articles. Une fois triés, je lis les articles qui m'interpellent/qui me semblent importants.
+                </p>
+                <p>A côté, je fais une veille un peu plus générique sur LinkedIn en suivant des comptes liés au développement (trucs et astuces, nouvelles fonctionnalités), des comptes proposant des tutoriels IT (ex : IT-Connect) et des comptes liés à la cybersécurité (ANSSI, CERT-FR...).</p>
+            </div> #}
+        </section>
+    </div>
+</main>
+
+<a id="back-to-top" class="fas" role="button" tabindex="0"></a>
+
+    <footer>
+        <div class="footer-container">
+            <div id="footer-myinfo" class="footer-sub">
+                <h4 class="title">Informations</h4>
+                <ul>
+                    <li>FLORIO Michele</li>
+                    <li>47300, Villeneuve-sur-Lot</li>
+                    <li><a href="tel:+33695810104">+33 6 95 81 01 04</a></li>
+                    <li><a href="mailto:florio.michele@outlook.com">florio.michele@outlook.com</a></li>
+                </ul>
+            </div>
+            <div id="footer-school" class="footer-sub">
+                <h4 class="title">Centre de formation</h4>
+                <ul>
+                    <li>UFA47</li>
+                    <li><a href="https://www.google.fr/maps/place/Lyc%C3%A9e+d'Enseignement+Agricole+Priv%C3%A9+l'Ermitage/@44.2119497,0.6195032,19z/data=!4m5!3m4!1s0x0:0x3eb9f93d41c06347!8m2!3d44.2120361!4d0.6203833" target="_blank">304 Avenue Joseph Amouroux <br> 47000, Agen</a></li>
+                    <!-- <li>304 Avenue Joseph Amouroux</li>
+                    <li>47000, Agen</li> -->
+                    <li><a href="tel:+33553660871">+33 5 53 66 08 71</a></li>
+                    <li><a href="mailto:inscription.bts@ufa47.org" target="_blank">inscription.bts@ufa47.org</a></li>
+                    <li><a href="https://ufa47.info" target="_blank">ufa47.info</a></li>
+                </ul>
+            </div>
+            <div id="footer-firm" class="footer-sub">
+                <h4 class="title">Entreprise</h4>
+                <ul>
+                    <li>@COM Expertise Comptable</li>
+                    <li><a href="https://www.google.fr/maps/place/'@Com.Expertise+Villeneuve+sur+lot'/@44.3896796,0.7092508,19z/data=!4m13!1m7!3m6!1s0x12aba9d175eed28d:0x816092bfbef148c5!2s1+Rue+du+Chevron+d'Or,+47300+Pujols!3b1!8m2!3d44.3908252!4d0.7079428!3m4!1s0x12ab07663525b58b:0xb9e1524c3a8c436b!8m2!3d44.389759!4d0.7094527" target="_blank">1 rue du Chevron d'Or <br> 47300, Pujols</a></li>
+                    <!-- <li>1 rue du Chevron d'Or</li>
+                    <li>47300, Pujols</li> -->
+                    <li><a href="tel:+33553498800">+33 5 53 49 88 00</a></li>
+                    <li><a href="https://www.acomaudit.com" target="_blank">acomaudit.com</a></li>
+                </ul>
+            </div>
+            <div id="footer-social" class="footer-sub">
+                <h4 class="title">Retrouvez-moi</h4>
+                <ul>
+                    <li><a href="https://www.linkedin.com/in/michele-florio-0a1714213/" target="_blank"><i class="fab fa-linkedin"></i>LinkedIn</a></li>
+                    <li><a href="https://www.github.com/redeifantasmi" target="_blank"><i class="fab fa-github"></i>Github</a></li>
+                    <hr>
+                    <li><a role="button" tabindex="0">Don't click</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
+<!-- <dialog id="project-sample" class="dialog">
+    <button class="dialog-closer"><i class="fas fa-xmark"></i></button>
+    <div class="dialog-content">
+        
+    </div>
+</dialog> -->
+
+{# <div id="projet-to-open"><?php if (isset($projet)) { echo "$projet"; } ?></div> #}
+
+{# <script defer src="includes/carousel.js"></script> #}
+{# <script>
+    const videos = <?= json_encode($videos) ?>;
+</script> #}
+
+<script defer src="{{ asset('assets/js/main.js') }}"></script>

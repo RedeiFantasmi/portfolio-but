@@ -1,0 +1,90 @@
+body {
+    background-color: #F0F0F0;
+}
+
+
+aside a, footer li, footer li a {
+    color: #454a55;
+}
+aside a:hover, footer {
+    color: #000000;
+    background-color: #E5E5E5;
+}
+aside a.selected {
+    color: #000000;
+    background-color: #D0D0D0;
+}
+
+
+main .container {
+    background-color: #F4F4F4;
+    color: #000000;
+}
+
+
+nav {
+    background-color: #D0D0D0;
+}
+nav #title, footer .title, footer li a:hover {
+    color: #000000;
+}
+nav #links a, #scroll-arrow, nav #theme-switcher, #burger-menu {
+    color: #454a55;
+}
+nav #links a:hover, nav #theme-switcher:hover, nav #theme-switcher:hover, #burger-menu:hover {
+    color: #000000;
+    background-color: #E5E5E5;
+}
+
+nav #theme-switcher i {
+    transform: rotate(180deg);
+}
+
+#back-to-top {
+    color: black;
+    background-color: white;
+}
+#back-to-top:hover {
+    color: #23252b;
+}
+
+
+/* CAROUSEL */
+#carousel-content img {
+    background-color: #D0D0D0;
+}
+.slide-btn {
+    background-color: #D0D0D0;
+    color: #454a55;
+    border-color: #454a55;
+}
+.slide-btn:hover {
+    background-color: #FFFFFF;
+}
+.carousel-btn {
+    background-color: lightgray;
+}
+.slide-desc .title {
+    border: solid 4px #23252b;
+    background-color: #D0D0D0;
+}
+.carousel-btn:hover {
+    background-color: gray;
+}
+
+.carousel-btn.selected {
+    background-color: #23252b;
+}
+
+
+/* Projets */
+#project-sample {
+    background-color: #D0D0D0;
+    color: #454a55;
+}
+#project-sample::backdrop {
+    background-color: #FFFFFF;
+}
+.dialog-closer {
+    color: #000000;
+}

@@ -1,0 +1,98 @@
+{% extends "home/template.html.twig" %}
+
+{% set age = date().diff(date('2003-07-13')) %}
+{% set skillIconsDir = 'assets/img/skills/' %}
+
+{% block presentation %}
+
+    <p>Bonjour, je m'appelle Michele FLORIO, j'ai {{ age.y }} ans et la programmation est l'une de mes plus grandes passions !</p>
+    <p>Féru d'informatique, je pratique le développement informatique depuis la 5<sup>ème</sup> (vers mes 12 ans), mais avant déjà je touchais à d'autre de ses facettes : montage/démontage d'ordinateurs, lecture du code source de certains sites internet, jeux vidéos... L'informatique m'intéresse dans la grande majorité de ses aspects.</p>
+    <p>Malgré ma spécialisation en développement, j'essaie également de m'intéresser à la partie réseau pour être polyvalent et être encore plus proche du domaine.</p>
+    <p>Je prévois de m'épanouir en devenant developpeur full-stack après avoir obtenu un diplôme de niveau BAC+5.</p>
+    <a class="link-button" role="button" href="assets/CV.pdf" target="_blank">Voir mon CV <span class="arrow"></span></a>
+    <p>Aujourd'hui, je suis en BTS SIO en alternance pour appronfondir mes connaissances sur le développement web/applicatif et l'informatique en général (pour être mieux préparé à de futures études) et acquérir de l'expérience professionnelle pour le futur.</p>
+    <p>Le BTS SIO se fait, comme tous les BTS, sur deux ans et propose deux spécialités : Solutions d'Infrastructure, Systèmes et Réseaux (SISR, typée réseau) et Solutions Logicielles et Applications Métiers (SLAM, typée développement).</p>
+    <p>J'ai choisi la spécialité SLAM car elle propose de former les étudiants aux langages web classiques (HTML, CSS, JS, PHP) puis de se spécialiser dans de l'applicatif métier pour répondre aux besoins des entreprises.</p>
+    <a class="link-button" role="button" href="https://ufa47.info/images/pdf/plaquettes/plaquette_sio.pdf" target="_blank">
+        Plaquette de l'établissement <span class="arrow"></span>
+    </a>
+    <br>
+    <a 
+        class="link-button" 
+        role="button" 
+        href="https://www.onisep.fr/Ressources/univers-formation/Formations/Post-bac/bts-services-informatiques-aux-organisations-option-a-solutions-d-infrastructure-systemes-et-reseaux" 
+        target="_blank"
+    >
+        Plus d'informations - onisep <span class="arrow"></span>
+    </a>
+
+{% endblock %}
+
+
+
+{% block career %}
+
+    <div class="career-list">
+        <h3>Scolaire</h3>
+        {% for careerItem in careersByType.sco %}
+            <div class="career-block">
+                <div class="career-title">
+                    <span class="date">
+                        {% if careerItem.startsAt != careerItem.endsAt %}
+                            {{ careerItem.startsAt|format_datetime(pattern='MMMM Y')|title }}-{{ careerItem.endsAt|format_datetime(pattern='MMMM Y')|title }}
+                        {% else %}
+                            {{ careerItem.startsAt|format_datetime(pattern='MMMM Y')|title }}
+                        {% endif %}
+                    </span>
+                    | {{ careerItem.title }}</div>
+                <div class="career-desc">
+                    {{ careerItem.description|raw }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="career-list">
+        <h3>Professionnel</h3>
+        {% for careerItem in careersByType.pro %}
+            <div class="career-block">
+                <div class="career-title">
+                    <span class="date">
+                        {% if careerItem.startsAt != careerItem.endsAt %}
+                            {{ careerItem.startsAt|format_datetime(pattern='MMMM Y')|title }}-{{ careerItem.endsAt|format_datetime(pattern='MMMM Y')|title }}
+                        {% else %}
+                            {{ careerItem.startsAt|format_datetime(pattern='MMMM Y')|title }}
+                        {% endif %}                                    
+                    </span>
+                    | {{ careerItem.title }}
+                </div>
+                <div class="career-desc">
+                    {{ careerItem.description|raw }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+
+
+{% block skills %}
+
+    {% for skillType in skillTypes %}
+        <div class="skills-block">
+            <h3 class="skills-block-title">{{ skillType.label }}</h3>
+            <div class="skills">
+                <div class="skill-icons">
+                    {% for skill in skillType.skills %}
+                        <img src="{{ asset("#{skillIconsDir}#{skill.icon}") }}" class="skill" data-name="{{ skill.name }}">
+                    {% endfor %}
+                </div>
+                <span class="skill-name">default</span>
+            </div>
+            <div class="skills-block-desc">
+                {{ skillType.description|raw }}
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
