@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Career;
 use App\Entity\Project;
+use App\Entity\ProjectTag;
 use App\Entity\Skill;
 use App\Entity\SkillType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -33,6 +34,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Administration');
         yield MenuItem::linkToCrud('Parcours', 'fas fa-list', Career::class);
         yield MenuItem::linkToCrud('Projets', 'fas fa-list', Project::class);
+        yield MenuItem::linkToCrud('Libellés de projets', 'fas fa-list', ProjectTag::class);
         yield MenuItem::linkToCrud('Compétences', 'fas fa-list', Skill::class);
         yield MenuItem::linkToCrud('Types de compétences', 'fas fa-list', SkillType::class);
 

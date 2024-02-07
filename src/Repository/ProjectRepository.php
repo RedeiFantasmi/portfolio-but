@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Project;
+use App\Entity\ProjectTag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -45,4 +46,14 @@ class ProjectRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findByTag(ProjectTag $projectTag): array
+    {
+        return $this->createQueryBuilder('p')
+            ->select('t')
+            ->where(':tag MEMBER OF p.tags')
+            ->setParameter('tag', $projectTag)
+            ->getQuery()
+            ->getResult();
+    }
 }

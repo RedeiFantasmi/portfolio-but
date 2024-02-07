@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Portfolio</title>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+        <script>
+            if(localStorage.getItem("light-theme") == "true") {
+                document.documentElement.dataset.theme = 'light';
+            }
+        </script>
+
+        <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome6/css/all.min.css') }}">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600;700;800&display=swap" rel="stylesheet">
+
+        {# <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100;8..144,200;8..144,300;8..144,400;8..144,500;8..144,600;8..144,700;8..144,800;8..144,900;8..144,1000&display=swap" rel="stylesheet"> #}
+        <!-- <link rel="stylesheet" href="/assets/css/monokai-sublime.min.css"> -->
+        {# <link rel="stylesheet" href="assets/css/atom-one-dark.min.css">
+
+        <script src="/assets/js/highlight.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery-3.6.0.min.js"></script> #}
+        
+    </head>
+    <body>
+
+{# <div class="spinner-backdrop">
+    <div class="spinner"></div>
+</div> #}
+
+        {% set currentRoute = app.request.get('_route') %}
+
+        <main>
+            <div class="container" style="width: 100%;">
+                <a class="link-button" href="{{ path('app_home') }}">Revenir à l'accueil <span class="arrow"></span></a>
+                {% if currentRoute == 'app_project_detail' %}
+                <a class="link-button" href="{{ path('app_project') }}">Revenir aux projets <span class="arrow"></span></a>
+                {% endif %}
+                
+                <section id="proj" class="container-section">
+                    {% if currentRoute == 'app_project' %}
+                        <h2>Mes projets</h2>
+                    {% else %}
+                        <h2>Projet #{{ project.id }} - {{ project.name }}</h2>
+                    {% endif %}
+                    
+                    
+                    {% block filters %}{% endblock %}
+                    <div class="project-list">
+                        {% block projects %}{% endblock %}
+                    </div>
+
+                    {% if currentRoute == 'app_project_detail' %}
+                    <div class="project-details">
+                        {% block project_detail %}{% endblock %}
+                    </div>
+                    {% endif %}
+                    
+                </section>
+            </div>
+        </main>
+
+        <a id="back-to-top" class="fas" role="button" tabindex="0"></a>
+
+        <footer>
+            <div class="footer-container">
+                <div id="footer-myinfo" class="footer-sub">
+                    {% block footer_section_1 %}{% endblock %}
+                </div>
+                <div id="footer-school" class="footer-sub">
+                    {% block footer_section_2 %}{% endblock %}
+                </div>
+                <div id="footer-firm" class="footer-sub">
+                    {% block footer_section_3 %}{% endblock %}
+                </div>
+                <div id="footer-social" class="footer-sub">
+                    {% block footer_section_4 %}{% endblock %}
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
+
+<script defer src="{{ asset('assets/js/main.js') }}"></script>

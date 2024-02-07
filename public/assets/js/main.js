@@ -116,13 +116,13 @@ window.onload = () => {
 
 
 
-    document.querySelectorAll('.skills .skill').forEach(sk => {
+    document.querySelectorAll('.skills .skill img').forEach(sk => {
 
-        const skill_name = sk.parentNode.parentNode.querySelector('.skill-name');
+        const skill_name = sk.parentNode.parentNode.parentNode.querySelector('.skill-name');
 
         sk.onmouseenter = () => {
 
-            skill_name.innerHTML = sk.dataset.name;
+            skill_name.innerHTML = sk.parentNode.dataset.name;
 
             skill_name.style.opacity = 1;
 

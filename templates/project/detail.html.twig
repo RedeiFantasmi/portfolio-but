@@ -1,0 +1,101 @@
+{% extends "project/template.html.twig" %}
+
+
+
+{% set projectCoversDir = 'assets/img/projects/' %}
+{% set skillIconsDir = 'assets/img/skills/' %}
+
+{% block project_detail %}
+
+<img src="{{ asset("#{projectCoversDir}#{project.cover}") }}" alt="">
+
+<div class="project-details-infos">
+    <h3>Informations générales</h3>
+    <ul>
+        <li><strong>Date de réalisation</strong> : {{ project.didAt|format_datetime(pattern='MMMM Y')|title }}</li>
+        <li><strong>Contexte</strong> : {{ project.context }}</li>
+        <li><strong>Lieu</strong> : {{ project.location }}</li>
+    </ul>
+</div>
+
+<div class="project-details-technologies">
+    <h3>Technologies utilisées</h3>
+    <div>
+    {% for technology in project.technologies %}
+        <img src="{{ asset("#{skillIconsDir}#{technology.icon}") }}" alt="{{ technology.name }} logo" title="{{ technology.name }}">
+    {% endfor %}
+    </div>
+</div>
+
+<div class="project-details-description">
+    <h3>Description</h3>
+    {{ project.description|raw }}
+</div>
+
+<div class="project-details-links">
+    <h3>Liens utiles</h3>
+    <div>
+        {% if project.github %}
+        <a href="{{ project.github }}" target="_blank" id="depot" title="Dépôt Github"><div class="git"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></div></a>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+{% block footer_section_1 %}
+
+<h4 class="title">Informations</h4>
+<ul>
+    <li>FLORIO Michele</li>
+    <li>47300, Villeneuve-sur-Lot</li>
+    <li><a href="tel:+33695810104">+33 6 95 81 01 04</a></li>
+    <li><a href="mailto:florio.michele@outlook.com">florio.michele@outlook.com</a></li>
+</ul>
+
+{% endblock %}
+
+
+
+{% block footer_section_2 %}
+
+<h4 class="title">Centre de formation</h4>
+<ul>
+    <li>IUT Blagnac</li>
+    <li><a href="https://www.google.fr/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjJjpjF15aEAxUsTKQEHcElDukQ4kB6BAhhEAM&url=%2Fmaps%2Fplace%2F%2Fdata%3D!4m2!3m1!1s0x12aea567f203159f%3A0xeff70715d0352e33%3Fsa%3DX%26ved%3D2ahUKEwjJjpjF15aEAxUsTKQEHcElDukQ4kB6BAg7EAA&usg=AOvVaw0Pi3LQYz-utD6pXh4Wqups&opi=89978449" target="_blank">BP 60073 31703 Cédex <br> 1 Pl. Georges Brassens <br> 31700, Blagnac</a></li>
+    <li><a href="tel:0562747575">05 62 74 75 75</a></li>
+    {# <li><a href="mailto:inscription.bts@ufa47.org" target="_blank">inscription.bts@ufa47.org</a></li> #}
+    <li><a href="https://www.iut-blagnac.fr" target="_blank">www.iut-blagnac.fr</a></li>
+</ul>
+
+{% endblock %}
+
+
+
+{% block footer_section_3 %}
+
+<h4 class="title">Entreprise</h4>
+<ul>
+    <li>@COM Expertise Comptable</li>
+    <li><a href="https://www.google.fr/maps/place/'@Com.Expertise+Villeneuve+sur+lot'/@44.3896796,0.7092508,19z/data=!4m13!1m7!3m6!1s0x12aba9d175eed28d:0x816092bfbef148c5!2s1+Rue+du+Chevron+d'Or,+47300+Pujols!3b1!8m2!3d44.3908252!4d0.7079428!3m4!1s0x12ab07663525b58b:0xb9e1524c3a8c436b!8m2!3d44.389759!4d0.7094527" target="_blank">1 rue du Chevron d'Or <br> 47300, Pujols</a></li>
+    <li><a href="tel:+33553498800">+33 5 53 49 88 00</a></li>
+    <li><a href="https://www.acomaudit.com" target="_blank">acomaudit.com</a></li>
+</ul>
+
+{% endblock %}
+
+
+
+{% block footer_section_4 %}
+
+<h4 class="title">Retrouvez-moi</h4>
+<ul>
+    <li><a href="https://www.linkedin.com/in/michele-florio-0a1714213/" target="_blank"><i class="fab fa-linkedin"></i>LinkedIn</a></li>
+    <li><a href="https://www.github.com/redeifantasmi" target="_blank"><i class="fab fa-github"></i>Github</a></li>
+    {# <hr> #}
+    {# <li><a role="button" tabindex="0">Don't click</a></li> #}
+</ul>
+
+{% endblock %}

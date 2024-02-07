@@ -1,0 +1,159 @@
+{% extends "project/template.html.twig" %}
+
+
+
+{% block filters %}
+
+<div style="padding: 12px; margin-bottom: 24px">
+    <label for="tag-filter">Filtrer par étiquette</label>
+    <select id="tag-filter">
+        <option value="">Tous</option>
+        {% for tag in tags %}
+            <option value="{{ tag.label }}">{{ tag.label }}</option>
+        {% endfor %}
+    </select>
+    <label for="type-filter">Filtrer par type</label>
+    <select id="type-filter">
+        <option value="">Tous</option>
+        <option value="sco">Scolaire</option>
+        <option value="pro">Professionnel</option>
+    </select>
+    <label for="skill-filter">Filtrer par compétence</label>
+    <select id="skill-filter">
+        <option value="">Tous</option>
+        {% for butSkill in butSkills %}
+            <option value="{{ butSkill.label }}">{{ butSkill.label }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+<script>
+
+window.onload = () => {
+    const projects = document.querySelector('.project-list').children;
+    const tagSelect = document.getElementById('tag-filter');
+    const typeSelect = document.getElementById('type-filter');
+    const skillSelect = document.getElementById('skill-filter');
+
+    let filters = [];
+
+    const filterProjects = () => {
+        for (const project of projects) {
+            const tags = [...project.querySelector('.project-card-footer').children];
+            if (!tags.find(el => !filters.tag || el.textContent === filters.tag)) {
+                project.style.display = 'none';
+            } else if (!(!filters.type || project.dataset.type === filters.type)) {
+                project.style.display = 'none';
+            } else if (!(!filters.skill || project.dataset.skills.includes('&' + filters.skill + '&'))) {
+                project.style.display = 'none';
+            } else {
+                project.style.display = 'flex';
+            }
+        }
+    }
+
+    tagSelect.addEventListener('change', () => {
+        filters.tag = tagSelect.value;
+        filterProjects();
+    });
+
+    typeSelect.addEventListener('change', () => {
+        filters.type = typeSelect.value;
+        filterProjects();
+    });
+
+    skillSelect.addEventListener('change', () => {
+        filters.skill = skillSelect.value;
+        filterProjects();
+    });
+}
+
+</script>
+
+{% endblock %}
+
+
+
+{% set projectCoversDir = 'assets/img/projects/' %}
+
+{% block projects %}
+
+    {% for project in projects %}
+        {% set projectSkills = '' %}
+        {% for skill in project.butSkills %}
+            {% set projectSkills = "#{projectSkills}&#{skill.label}&" %}
+        {% endfor %}
+
+        <div class="project-card" data-type="{{ project.type }}" data-skills="{{ projectSkills }}">
+            <div class="project-card-body">
+                <h5 class="project-card-title">{{ project.name }}</h5>
+                <p>{{ project.summary }}</p>
+            </div>
+            <div class="project-card-footer">
+                {% for tag in project.tags %}
+                    <span class="tag" style="border-color: {{ tag.color }}; color: {{ tag.color }}; background-color: {{ tag.color }}33">{{ tag.label }}</span>
+                {% endfor %}
+            </div>
+            <a href="/project/{{ project.id }}" class="link-stretch"></a>
+            <img src="{{ asset("#{projectCoversDir}#{project.cover}") }}" alt="">
+        </div>
+    {% endfor %}
+
+{% endblock %}
+
+
+
+{% block footer_section_1 %}
+
+<h4 class="title">Informations</h4>
+<ul>
+    <li>FLORIO Michele</li>
+    <li>47300, Villeneuve-sur-Lot</li>
+    <li><a href="tel:+33695810104">+33 6 95 81 01 04</a></li>
+    <li><a href="mailto:florio.michele@outlook.com">florio.michele@outlook.com</a></li>
+</ul>
+
+{% endblock %}
+
+
+
+{% block footer_section_2 %}
+
+<h4 class="title">Centre de formation</h4>
+<ul>
+    <li>IUT Blagnac</li>
+    <li><a href="https://www.google.fr/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjJjpjF15aEAxUsTKQEHcElDukQ4kB6BAhhEAM&url=%2Fmaps%2Fplace%2F%2Fdata%3D!4m2!3m1!1s0x12aea567f203159f%3A0xeff70715d0352e33%3Fsa%3DX%26ved%3D2ahUKEwjJjpjF15aEAxUsTKQEHcElDukQ4kB6BAg7EAA&usg=AOvVaw0Pi3LQYz-utD6pXh4Wqups&opi=89978449" target="_blank">BP 60073 31703 Cédex <br> 1 Pl. Georges Brassens <br> 31700, Blagnac</a></li>
+    <li><a href="tel:0562747575">05 62 74 75 75</a></li>
+    {# <li><a href="mailto:inscription.bts@ufa47.org" target="_blank">inscription.bts@ufa47.org</a></li> #}
+    <li><a href="https://www.iut-blagnac.fr" target="_blank">www.iut-blagnac.fr</a></li>
+</ul>
+
+{% endblock %}
+
+
+
+{% block footer_section_3 %}
+
+<h4 class="title">Entreprise</h4>
+<ul>
+    <li>@COM Expertise Comptable</li>
+    <li><a href="https://www.google.fr/maps/place/'@Com.Expertise+Villeneuve+sur+lot'/@44.3896796,0.7092508,19z/data=!4m13!1m7!3m6!1s0x12aba9d175eed28d:0x816092bfbef148c5!2s1+Rue+du+Chevron+d'Or,+47300+Pujols!3b1!8m2!3d44.3908252!4d0.7079428!3m4!1s0x12ab07663525b58b:0xb9e1524c3a8c436b!8m2!3d44.389759!4d0.7094527" target="_blank">1 rue du Chevron d'Or <br> 47300, Pujols</a></li>
+    <li><a href="tel:+33553498800">+33 5 53 49 88 00</a></li>
+    <li><a href="https://www.acomaudit.com" target="_blank">acomaudit.com</a></li>
+</ul>
+
+{% endblock %}
+
+
+
+{% block footer_section_4 %}
+
+<h4 class="title">Retrouvez-moi</h4>
+<ul>
+    <li><a href="https://www.linkedin.com/in/michele-florio-0a1714213/" target="_blank"><i class="fab fa-linkedin"></i>LinkedIn</a></li>
+    <li><a href="https://www.github.com/redeifantasmi" target="_blank"><i class="fab fa-github"></i>Github</a></li>
+    {# <hr> #}
+    {# <li><a role="button" tabindex="0">Don't click</a></li> #}
+</ul>
+
+{% endblock %}
